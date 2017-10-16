@@ -1,0 +1,20 @@
+{
+  "name": "txgh-serverless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "github-api": "^3.0.0",
+    "md5": "^2.2.1",
+    "serverless-plugin-include-dependencies": "^3.0.0",
+    "transifex": "^1.5.0"
+  },
+  "devDependencies": {
+    "serverless": "^1.23.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache License, Version 2.0"
+}

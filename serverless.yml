@@ -1,0 +1,41 @@
+service: txgh-serverless
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    GH_REPO: ${env:SLS_GH_REPO}
+    GH_BASE_BRANCH: ${env:SLS_GH_BASE_BRANCH}
+    GH_COMMITER_USERNAME: ${env:SLS_GH_COMMITER_USERNAME}
+    GH_COMMITER_EMAIL: ${env:SLS_GH_COMMITER_EMAIL}
+    GH_COMMITER_TOKEN: ${env:SLS_GH_COMMITER_TOKEN}
+    TX_ORG: ${env:SLS_TX_ORG}
+    TX_PROJECT: ${env:SLS_TX_PROJECT}
+    TX_SECRET: ${env:SLS_TX_SECRET}
+    TX_CREDENTIAL: ${env:SLS_TX_CREDENTIAL}
+    SITE_URL: ${env:SLS_SITE_URL}
+
+package:
+  exclude:
+    - node_modules/**
+
+plugins:
+  - serverless-plugin-include-dependencies
+
+
+functions:
+  transifex:
+    handler: src/transifex.transifex
+    events:
+      - http:
+          path: transifex
+          method: post
+          cors: true
+  github:
+    handler: src/github.github
+    events:
+      - http:
+          path: github
+          method: post
+          cors: true
+
