@@ -157,13 +157,17 @@ function fetchTranslation(project_slug, resource_slug, lang) {
       // TODO Handle translator other than po files 
       const lastTranslator = data.match(/^"Last\-Translator: (.*),.*$/m);
 
+      console.log(`[INFO] Last-Translator: ${lastTranslator}`);
+
       let translator = null;
       if (lastTranslator) {
         const m = lastTranslator[1].trim().match(/(.*) <(.*)>/);
-        translator = {
-          name: m[1],
-          email: m[2]
-        };
+        if (m) {
+          translator = {
+            name: m[1],
+            email: m[2]
+          };
+        }
       }
 
       resolve({
