@@ -45,6 +45,12 @@ module.exports.transifex = (event, context, callback) => {
   const txEvent = body.event;
 
   console.log(`[INFO] Handling ${body}`);
+
+  if (txEvent === 'fillup_completed') {
+    console.log(`[INFO] Ignore handling transifex webhook because of 'fillup_completed' event.`);
+    callback(null, {statusCode: 200});
+    return;
+  }
   
   handleHook(txProject, txResource, txLanguage, txEvent)
     .then(() => {
